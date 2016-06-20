@@ -66,7 +66,7 @@ redisession
 ###补足
 package org.wingsdak.sessmgr.redissession 下的所有代码，衍生自github的下述开源项目
 
-(https://github.com/jcoleman/tomcat-redis-session-manager "jcoleman/tomcat-redis-session-manager")
+[jcoleman/tomcat-redis-session-manager](https://github.com/jcoleman/tomcat-redis-session-manager)
 
 该项目是基于以下许可证发布：
 ```
