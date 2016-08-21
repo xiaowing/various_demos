@@ -1,6 +1,7 @@
 *.project
 *.classpath
 *.class
+*.factorypath
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -16,6 +17,7 @@ hs_err_pid*
 # directories
 target/
 .settings/
+.apt_generated/
 
 # specific file
 redisession/test/redisession_test.py
