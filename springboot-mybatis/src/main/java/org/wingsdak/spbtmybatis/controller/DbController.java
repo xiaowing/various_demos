@@ -10,8 +10,6 @@ import org.wingsdak.spbtmybatis.api.ResultVO;
 import org.wingsdak.spbtmybatis.entity.PgDatabaseInfo;
 import org.wingsdak.spbtmybatis.persistence.PgDatabaseMapper;
 
-import com.alibaba.fastjson.JSON;
-
 @RestController
 public class DbController {
 	@Autowired
@@ -25,11 +23,10 @@ public class DbController {
 		try{
 			// 在PostgreSQL系统表中，UTF8编码的枚举值为6.
 			List<PgDatabaseInfo> dbInfos = dbMapper.getUtf8Databases(6);
-			String jsonStr = JSON.toJSONString(dbInfos, true);
 			
 			result.setReturnValue(ResultVO.RESULT_OK);
 			result.setMessage("");
-			result.setData(jsonStr);
+			result.setData(dbInfos);
 			return result;
 		}
 		catch (Exception ex){
