@@ -1,9 +1,5 @@
 package org.wingsdak.spbtmybatis.conf;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +23,12 @@ public class ServletConfig {
 	public ServletRegistrationBean registerServlet(){
 		ServletRegistrationBean statViewServletRegistrationBean = 
 				new ServletRegistrationBean(dispatchDruidServlet(), "/druid/*");
-		statViewServletRegistrationBean.addInitParameter(StatViewServlet.PARAM_NAME_ALLOW,  "localhost/127.0.0.1");
+		/* 
+		 * According to the definition of StatViewServlet, the white-list of druid StatViewServlet
+		 * can be specifed with the format as "xxx.xxx.xxx.xxx/yyy.yyy.yyy.yyy" to limit the access to 
+		 * the StatViewServlet.  
+		 */
+		statViewServletRegistrationBean.addInitParameter(StatViewServlet.PARAM_NAME_ALLOW,  "127.0.0.1");
 		statViewServletRegistrationBean.addInitParameter(StatViewServlet.PARAM_NAME_USERNAME, "admin");
 		statViewServletRegistrationBean.addInitParameter(StatViewServlet.PARAM_NAME_PASSWORD, "password");
 		return statViewServletRegistrationBean;
