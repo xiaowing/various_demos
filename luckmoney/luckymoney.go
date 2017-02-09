@@ -15,9 +15,8 @@ const PRECISION = 0.001
 
 // 红包的结构体定义
 type Envelope struct {
-	mu                sync.Mutex // 互斥锁
-	residualMoney     float32    // 红包剩余的金额
-	residualPartition int        // 红包分与的人数
+	residualMoney     float32 // 红包剩余的金额
+	residualPartition int     // 红包分与的人数
 }
 
 // 红包初始化。传入金额，份数
@@ -34,9 +33,6 @@ func (self *Envelope) Init(money float32, divides int) {
 		panic(fmt.Sprintf("Inappropriate money %f or partitions %d.\n", money, divides))
 	}
 
-	self.mu.Lock()
-	defer self.mu.Unlock()
-
 	self.residualMoney = money
 	self.residualPartition = divides
 }
@@ -44,9 +40,6 @@ func (self *Envelope) Init(money float32, divides int) {
 // 抢红包的模拟逻辑。应并发执行
 func (self *Envelope) Grab() float32 {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-
-	self.mu.Lock()
-	defer self.mu.Unlock()
 
 	if self.residualPartition == 0 {
 		return 0.00
@@ -74,9 +67,6 @@ func (self *Envelope) Grab() float32 {
 
 // 获得红包结构体的当前状态数据
 func (self *Envelope) GetCurrentStatus() (money float32, remained int) {
-	self.mu.Lock()
-	defer self.mu.Unlock()
-
 	return self.residualMoney, self.residualPartition
 }
 
@@ -104,19 +94,23 @@ func main() {
 	}
 
 	env := new(Envelope)
+	ch := make(chan *Envelope, 1)
+
 	env.Init(float32(*inputAmountPtr), *inputDividesPtr)
 
 	var wait sync.WaitGroup
 	wait.Add(participants)
 
 	for i := 0; i < participants; i++ {
-		go func(currentNo int, envelope *Envelope) {
+		go func(currentNo int, ich chan *Envelope) {
+			envelope := <-ich
 			grabbedMoney := envelope.Grab()
+			ich <- envelope
 			fmt.Printf("Participant No.%d grabbed: %3.2f.\n", (currentNo + 1), grabbedMoney)
 			wait.Done()
-		}(i, env)
+		}(i, ch)
 	}
-
+	ch <- env
 	wait.Wait()
 
 	money, divs := env.GetCurrentStatus()
