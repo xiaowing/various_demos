@@ -95,6 +95,6 @@ func (id ObjectId) GetLockKey() int64 {
 	return int64(binary.BigEndian.Uint64(keyInBytes[:]))
 }
 
-func AreFloatsEqual(f1, f2 float32) bool {
-	return math.Dim(float64(f1), float64(f2)) < precision
+func AreFloatsEqual(f1, f2 float64) bool {
+	return math.Dim(f1, f2) < precision
 }

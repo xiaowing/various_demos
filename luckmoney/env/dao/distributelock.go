@@ -35,7 +35,6 @@ func TryLock(id util.ObjectId) (*DistributeLock, error) {
 
 	stmt := "SELECT pg_try_advisory_lock($1);"
 	key := id.GetLockKey()
-	fmt.Printf("Trying to aquire the advisory lock of %d.\n", key)
 
 	row := db.QueryRow(stmt, key)
 	var ret bool
