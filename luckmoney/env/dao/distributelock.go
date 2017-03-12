@@ -13,10 +13,10 @@ import (
 
 const dbengine = "postgres"
 
-var host = "10.0.1.110"
+var host = "127.0.0.1"
 var port = 26550
 var username = "wing"
-var password = "asdf1234"
+var password = "xxxxyyyy"
 
 type DistributeLock struct {
 	Key     int64

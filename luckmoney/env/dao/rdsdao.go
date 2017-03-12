@@ -9,9 +9,9 @@ import (
 	redis "github.com/garyburd/redigo/redis"
 )
 
-var redisHost = "10.0.1.110"
+var redisHost = "127.0.0.1"
 var redisPort = 6379
-var redisPassword = "asdf1234"
+var redisPassword = "xxxxyyyy"
 
 var hsetMoney = "money"
 var hsetPartition = "partition"
