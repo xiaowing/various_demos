@@ -11,6 +11,7 @@
   </parent>
   
   <properties>
+        <!-- 如果要实际部署在容器中(如用于生产环境)，则打包方式应改为"war" -->
         <package>jar</package>
         <java.version>1.7</java.version>
 
@@ -36,6 +37,23 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <!-- 
+                                       若要使用log4j，需要排除掉Spring-boot-start中自带的logback组件 
+                                       但，这也会导致SpringJUnit4ClassRunner初始化失败，
+                                       因此需要在工程中引入Spring框架的替换用log组件 spring-boot-starter-log4j
+            -->
+            <exclusions>
+                <exclusion> 
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <!-- 在Spring Boot中引入Log4j -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j</artifactId>
         </dependency>
         
         <!-- Spring的DaoSupport需要 -->
@@ -115,6 +133,7 @@
         </resources>
 
         <plugins>
+            <!-- 如果要以war包形式部署在容器中，则需要将下述plugin依赖注释掉 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
