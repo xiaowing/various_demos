@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.wingsdak</groupId>
   <artifactId>spboot-mybatis</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1</version>
   
   <parent>
         <groupId>org.springframework.boot</groupId>

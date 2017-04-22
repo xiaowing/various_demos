@@ -12,6 +12,7 @@ public class PgDatabaseInfo implements Serializable {
 	private String databaseName;
 	private String databaseDbaName;
 	private String databaseCtype;
+	private String databaseEncode;
 	
 	public String getDatabaseName() {
 		return databaseName;
@@ -30,6 +31,12 @@ public class PgDatabaseInfo implements Serializable {
 	}
 	public void setDatabaseCtype(String databaseCtype) {
 		this.databaseCtype = databaseCtype;
+	}
+	public String getDatabaseEncode() {
+		return databaseEncode;
+	}
+	public void setDatabaseEncode(String databaseEncode) {
+		this.databaseEncode = databaseEncode;
 	}
 
 }

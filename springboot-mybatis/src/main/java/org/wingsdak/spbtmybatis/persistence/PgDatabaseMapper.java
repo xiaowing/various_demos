@@ -10,14 +10,15 @@ import org.apache.ibatis.type.JdbcType;
 import org.wingsdak.spbtmybatis.entity.PgDatabaseInfo;
 
 public interface PgDatabaseMapper {
-	@Select("SELECT datname, rolname, datctype "
+	@Select("SELECT datname, rolname, datctype, pg_encoding_to_char(encoding) AS encode "
 			+ "FROM pg_database, pg_roles "
 			+ "WHERE pg_database.encoding=#{encodingType} "
 			+ "AND pg_database.datdba=pg_roles.oid;")
 	@Results(value = {
 			@Result(property="databaseName", column="datname", jdbcType=JdbcType.VARCHAR),
 			@Result(property="databaseDbaName", column="rolname", jdbcType=JdbcType.VARCHAR),
-			@Result(property="databaseCtype", column="datctype", jdbcType=JdbcType.VARCHAR)
+			@Result(property="databaseCtype", column="datctype", jdbcType=JdbcType.VARCHAR),
+			@Result(property="databaseEncode", column="encode", jdbcType=JdbcType.VARCHAR)
 	})
 	List<PgDatabaseInfo> getUtf8Databases(@Param("encodingType") int encodeType);
 }
