@@ -7,6 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.wingsdak.spbtmybatis.utility.Logger;
 
 @SpringBootApplication(scanBasePackages = {"org.wingsdak.spbtmybatis"})
 public class Application extends SpringBootServletInitializer implements ApplicationContextAware {
@@ -30,5 +31,6 @@ public class Application extends SpringBootServletInitializer implements Applica
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+		Logger.info("spbtmybatis application started.");
 	}
 }

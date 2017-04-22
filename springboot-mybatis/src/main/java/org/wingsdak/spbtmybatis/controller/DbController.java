@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.wingsdak.spbtmybatis.api.ResultVO;
 import org.wingsdak.spbtmybatis.entity.PgDatabaseInfo;
 import org.wingsdak.spbtmybatis.persistence.PgDatabaseMapper;
+import org.wingsdak.spbtmybatis.utility.Logger;
 
 @RestController
 public class DbController {
@@ -18,6 +19,7 @@ public class DbController {
 	@RequestMapping(path="/databases", method=RequestMethod.GET)
     public ResultVO databases() {
 		ResultVO result = new ResultVO();
+		Logger.info("A new request coming.");
 		
 		// 调用Mapper接口所映射的SQL文
 		try{
@@ -30,6 +32,7 @@ public class DbController {
 			return result;
 		}
 		catch (Exception ex){
+			Logger.error(ex, "An unexpected error occurred during executing sql: %s", ex.getMessage());
 			result.setReturnValue(ResultVO.RESULT_NG);
 			result.setMessage(ex.getMessage());
 			result.setData("");
