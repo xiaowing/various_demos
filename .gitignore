@@ -15,6 +15,7 @@
 hs_err_pid*
 
 # directories
+logs/
 target/
 .settings/
 .apt_generated/
