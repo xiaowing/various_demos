@@ -1,6 +1,5 @@
 package org.wingsdak.spbtmybatis;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +17,6 @@ public class Application extends SpringBootServletInitializer implements Applica
 	 * 进而通过ApplicationContext#getBean()方法获得在Spring容器中托管的注入对象。
 	 */
 	private static ApplicationContext appContext;
-	private static Logger logger = Logger.getLogger(Application.class);
 	
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -32,6 +30,5 @@ public class Application extends SpringBootServletInitializer implements Applica
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		logger.info("Mybatis Booter started.");
 	}
 }
