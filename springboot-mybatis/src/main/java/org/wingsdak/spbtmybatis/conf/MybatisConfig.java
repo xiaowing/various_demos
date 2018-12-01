@@ -33,24 +33,6 @@ public class MybatisConfig {
 		/*
 		 * 配置DataSource的Bean
 		 */
-//		DruidDataSource ds = new DruidDataSource();
-//		ds.setDriverClassName("org.postgresql.Driver");
-//		ds.setUrl("jdbc:postgresql://10.0.1.200:20480/playdb");
-//		ds.setUsername("xiaowing");
-//		ds.setPassword("asdf1234");
-//		try {
-//			ds.setFilters("stat");
-//		} catch (SQLException e) {
-//			// Skip
-//			;;
-//		}
-//		ds.setInitialSize(1);
-//		ds.setMinIdle(8);
-//		ds.setMaxActive(32);
-//		ds.setMaxWait(20000);
-//		ds.setTimeBetweenEvictionRunsMillis(60000);
-//		ds.setMinEvictableIdleTimeMillis(60000);
-//		return ds;
 		DruidDataSource ds = new DruidDataSource();
 		ds.setDriverClassName("org.postgresql.Driver");
 		ds.setUrl(url);
